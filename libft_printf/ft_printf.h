@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:35:21 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/08/08 13:35:33 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/08/18 20:07:28 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	get_args(t_data *data);
 void	give_address(t_data *data);
 void	give_nbr(t_data *data);
 void	give_str(t_data *data);
-t_data	*getdata(void);
 void	ft_putnbr_base_h(t_data *data, unsigned long nbr, char *base);
 void	ft_putnbr(int n, t_data *data);
 void	ft_putchar(char c, t_data *data);

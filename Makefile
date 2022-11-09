@@ -15,11 +15,22 @@ FLAGS    := -Wall -Wextra -Werror
 ################################################################################
 
 SRCS        :=         main.c \
-                          
+                       check_info.c \
+		       error.c \
+		       put_map.c \
+		       check_map.c \
+
 OBJS        := $(SRCS:.c=.o)
 
+ifeq ($(UNAME), Darwin)
+.c.o:
+	${CC} ${FLAGS} -Imlx -c $< -o ${<:.c=.o}
+endif
+
+ifeq ($(UNAME), Linux)
 .c.o:
 	${CC} ${FLAGS} -Imlx_linux -c $< -o ${<:.c=.o}
+endif
 
 ################################################################################
 #                                  Makefile  objs                              #
@@ -36,12 +47,16 @@ RM		    := rm -f
 
 UNAME		:=	$(shell uname)
 
+all:		${NAME}
+
 ifeq ($(UNAME), Darwin)
 $(NAME): ${OBJS}
 			@echo "$(GREEN)Compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
 			@ $(MAKE) -C mlx all >/dev/null 2>&1
 			@ cp ./mlx/libmlx.a .
-			$(CC) $(CFLAGS) -g3 -Ofast -o $(NAME) -Imlx $(OBJS) -Lmlx -lmlx -lm -framework OpenGL -framework AppKit
+			@ $(MAKE) -C libft/
+			@ cp ./libft/libft.a .
+			$(CC) $(CFLAGS) -g3 -Ofast -o $(NAME) -Imlx $(OBJS) libft.a -Lmlx -lmlx -lm -framework OpenGL -framework AppKit
 			@echo "$(GREEN)$(NAME) created[0m ✔️"
 endif
 
@@ -50,11 +65,11 @@ $(NAME): ${OBJS}
 			@echo "$(GREEN)Linux compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
 			@chmod 777 mlx_linux/configure
 			@ $(MAKE) -C mlx_linux all
-			$(CC) $(CFLAGS) -g3 -o $(NAME) $(OBJS) -Imlx_linux -Lmlx_linux -lmlx -lmlx_Linux -L/usr/lib -lXext -lX11 -lm
+			@ $(MAKE) -C libft/
+			@ cp ./libft/libft.a .
+			$(CC) $(CFLAGS) -g3 -o $(NAME) $(OBJS) libft.a -Imlx_linux -Lmlx_linux -lmlx -lmlx_Linux -L/usr/lib -lXext -lX11 -lm
 			@echo "$(GREEN)$(NAME) created[0m ✔️"
 endif
-
-all:		${NAME}
 
 ifeq ($(UNAME), Darwin)
 clean:
@@ -73,15 +88,16 @@ endif
 
 ifeq ($(UNAME), Linux)
 fclean:		clean
-			@ ${RM} ${NAME}
-			@ $(MAKE) -C mlx_linux clean 
+			@ ${RM} ${NAME} libft.a
+			@ $(MAKE) -C mlx_linux clean
+			@ $(MAKE) -C libft/ fclean
 			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✔️"
 endif
 
 ifeq ($(UNAME), Darwin)
 fclean:		clean
-			@ ${RM} ${NAME}
-			@ rm libmlx.a
+			@ ${RM} ${NAME} libft.a libmlx.a
+			@ $(MAKE) -C libft/ fclean
 			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✔️"
 endif
 

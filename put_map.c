@@ -6,13 +6,11 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 09:52:50 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/06 09:28:44 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/10 12:30:28 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx.h"
 #include "so_long.h"
-#include <unistd.h>
 	
 
 void	set_corner(t_mlx *mlx)
@@ -76,6 +74,7 @@ void	put_map(t_mlx *mlx, char *map)
 	int	x;
 	int	y = 0;
 
+	(void)map;
 	set_assets(mlx);
 	mlx->x_win = 384;
 	mlx->y_win = 384;

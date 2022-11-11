@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:03:27 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/08 15:08:41 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/10 14:28:55 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,15 @@
 
 void	check_column(t_mlx *mlx, char *map)
 {
-	char	*tmp;
-	char	*tmp_2;
 }
 
-void	check_row(t_mlx *mlx, char *map)
+int	check_row(char *map)
 {
-	char	*tmp;
-	char	*tmp_2;
 }
 
 void	check_map(t_mlx *mlx, char *map)
 {
 	int		map_fd;
-	int		counter;
 
 	map_fd = open(map, O_RDONLY);
 	if (map_fd == -1)
@@ -35,16 +30,10 @@ void	check_map(t_mlx *mlx, char *map)
 		error_log("loading map error!");
 		exit(0);
 	}
-	counter = 0;
-	while (tmp != NULL || tmp_2 != NULL)
+	if (!check_row(map))
 	{
-		tmp = get_next_line(map_fd);
-		tmp_2 = get_next_line(map_fd);
-		if (ft_strlen(tmp) != ft_strlen(tmp_2))
-		{
-			error_log("not a rectangle map!");
-			exit(0);
-		}
-		counter++;
+		error_log("not a rectangle map!");
+		exit(0);
 	}
+
 }

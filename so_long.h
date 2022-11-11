@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:21:47 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/08 13:24:47 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/10 12:38:55 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,16 @@ typedef struct s_assets {
 typedef struct s_mlx {
 	void		*mlx;
 	void		*window;
-	t_assets	*assets;
 	char		**map;
 	int		x_win;
 	int		y_win;
+	t_assets	*assets;
 }		t_mlx;
 
 t_mlx	*get_data(void);
 void	check_info(int ac, char *av);
 void	error_log(char *err_mess);
 void	put_map(t_mlx *mlx, char *map);
-void	check_map(t_mlx *mlx, char *map);
+/* void	check_map(t_mlx *mlx, char *map); */
 
 #endif

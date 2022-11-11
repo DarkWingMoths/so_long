@@ -1,8 +1,3 @@
-#  |  |  ___ \    \  |         |
-#  |  |     ) |  |\/ |   _  |  |  /   _ 
-# ___ __|  __/   |   |  (   |    <    __/ 
-#    _|  _____| _|  _| \__,_| _|\_\ \___|
-#                              by jcluzet
 ################################################################################
 #                                     CONFIG                                   #
 ################################################################################
@@ -17,20 +12,9 @@ FLAGS    := -Wall -Wextra -Werror
 SRCS        :=         main.c \
                        check_info.c \
 		       error.c \
-		       put_map.c \
-		       check_map.c \
+		       put_map.c 
 
 OBJS        := $(SRCS:.c=.o)
-
-ifeq ($(UNAME), Darwin)
-.c.o:
-	${CC} ${FLAGS} -Imlx -c $< -o ${<:.c=.o}
-endif
-
-ifeq ($(UNAME), Linux)
-.c.o:
-	${CC} ${FLAGS} -Imlx_linux -c $< -o ${<:.c=.o}
-endif
 
 ################################################################################
 #                                  Makefile  objs                              #
@@ -46,6 +30,16 @@ CYAN 		:= \033[1;36m
 RM		    := rm -f
 
 UNAME		:=	$(shell uname)
+
+ifeq ($(UNAME), Darwin)
+.c.o:
+	${CC} ${FLAGS} -Imlx -c $< -o ${<:.c=.o}
+endif
+
+ifeq ($(UNAME), Linux)
+.c.o:
+	${CC} ${FLAGS} -Imlx_linux -c $< -o ${<:.c=.o}
+endif
 
 all:		${NAME}
 
@@ -88,7 +82,7 @@ endif
 
 ifeq ($(UNAME), Linux)
 fclean:		clean
-			@ ${RM} ${NAME} libft.a
+			@ ${RM} ${NAME} libft.a libmlx.a /mlx_linux/libmlx.a
 			@ $(MAKE) -C mlx_linux clean
 			@ $(MAKE) -C libft/ fclean
 			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✔️"

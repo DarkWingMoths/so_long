@@ -90,8 +90,9 @@ endif
 
 ifeq ($(UNAME), Darwin)
 fclean:		clean
-			@ ${RM} ${NAME} libft.a libmlx.a
+			@ ${RM} ${NAME} libft.a libmlx.a /mlx/libmlx.a
 			@ $(MAKE) -C libft/ fclean
+			@ $(MAKE) -C mlx clean
 			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✔️"
 endif
 

@@ -12,7 +12,10 @@ FLAGS    := -Wall -Wextra -Werror
 SRCS        :=         main.c \
                        check_info.c \
 		       error.c \
-		       put_map.c 
+		       put_map.c \
+		       set_assets.c \
+		       clean_exit.c \
+		       check_map.c
 
 OBJS        := $(SRCS:.c=.o)
 

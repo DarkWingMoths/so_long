@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:03:27 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/13 16:33:25 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/14 16:30:02 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,34 @@ void	check_column(t_mlx *mlx, char *map)
 {
 }
 
-int	check_row(t_mlx *mlx)
+int	check_row(t_map *map)
 {
-	char	*tmp;
+	int	i;
+	int	j;
 
-	while (tmp != '\0')
+	i = 0;
+	j = 0;
+	while (map->map[i])
 	{
-		tmp = get_next_line(fd);
+		while (map->map[i][j])
+		{
+			if (!strrchr("10CEP", map->map[i][j]))
+			{
+				error_log("invalid character inside map!");
+				return (0);
+			}
+			if (i == 0 || i == y_max 
+
+		}
 	}
 }
 
-void	get_size(t_mlx *mlx, char *map)
+void	get_size(t_map *map, char *map_dir)
 {
 	int	map_fd;
 	char	*tmp;
 
-	map_fd = open(map, O_RDONLY);
+	map_fd = open(map_dir, O_RDONLY);
 	if (map_fd == -1)
 	{
 		error_log("loading map!");
@@ -39,18 +51,18 @@ void	get_size(t_mlx *mlx, char *map)
 		exit(0);
 	}
 	tmp = get_next_line(map_fd);
-	mlx->x_max = ft_strlen(tmp);
-	mlx->y_max = 1;
+	map->x_max = ft_strlen(tmp);
+	map->y_max = 0;
 	while (tmp)
 	{
-		mlx->y_max += 1;
-		if (ft_strlen(tmp) != mlx->x_max)
+		if (ft_strlen(tmp) != map->x_max)
 		{
 			error_log("bad map!");
 			close(map_fd);
 			exit(0);
 		}
 		tmp = get_next_line(map_fd);
+		map->y_max += 1;
 	}
 	close(map_fd);
 }
@@ -61,22 +73,44 @@ void	store_map(t_mlx *mlx, char *map)
 	int	map_fd;
 
 	i = 0;
-	mlx->map = ft_calloc(mlx->y_max, sizeof(char));
-	if (!mlx->map)
+	map_fd = open(map, O_RDONLY);
+	if (map_fd == -1)
 	{
-		free(mlx->map);
+		error_log("loading map!");
+		close(map_fd);
 		exit(0);
 	}
-	while (i <= mlx->y_max)
+	mlx->map->map = ft_calloc(mlx->map->y_max, sizeof(char));
+	if (!mlx->map)
+		clean_exit(mlx, 0);
+	while (i <= mlx->map->y_max)
 	{
-		mlx->map[i] = ft_calloc(mlx->x_max, sizeof(char));
-		if (!mlx->map[i])
-
+		mlx->map->map[i] = ft_calloc(mlx->map->x_max, sizeof(char));
+		if (!mlx->map->map[i])
+			clean_exit(mlx, 0);
+		mlx->map->map[i] = get_next_line(map_fd);
+		i++;
 	}
+	close(map_fd);
 }
-void	check_map(t_mlx *mlx, char *map)
+void	check_map(t_mlx *mlx, char *map_dir)
 {
-	get_size(mlx, map);
-	store_map(mlx, map);
-	check_row(mlx);
+	get_size(mlx->map, map_dir);
+	if (mlx->map->x_max < 4 || mlx->map->y_max < 4)
+	{
+		if ((mlx->map->x_max == 3 && mlx->map->y_max < 5)
+				|| (mlx->map->y_max == 3 && mlx->map->x_max < 5))
+		{
+			error_log("map too small!");
+			exit(0);
+		}
+		if (mlx->map->x_max < 4 && mlx->map->y_max < 4)
+		{
+			error_log("map too small!");
+			exit(0);
+		}
+	}
+	store_map(mlx, map_dir);
+	if (!check_row(mlx->map))
+		clean_exit(mlx, 0);
 }

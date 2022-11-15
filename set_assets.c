@@ -6,10 +6,11 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 11:33:37 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/14 13:03:53 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/15 14:20:20 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "mlx/mlx.h"
 #include "so_long.h"
 
 void	set_player(t_mlx *mlx)
@@ -57,6 +58,9 @@ void	set_wall(t_mlx *mlx)
 			&mlx->ass->x, &mlx->ass->y);
 	mlx->ass->wall[3] = mlx_xpm_file_to_image(mlx->mlx, \
 			"./assets/WallR.xpm", \
+			&mlx->ass->x, &mlx->ass->y);
+	mlx->ass->wall[4] = mlx_xpm_file_to_image(mlx->mlx, \
+			"./assets/WallIN.xpm", \
 			&mlx->ass->x, &mlx->ass->y);
 }
 

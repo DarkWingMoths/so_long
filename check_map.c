@@ -6,14 +6,24 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:03:27 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/14 16:30:02 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/15 08:51:55 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	check_column(t_mlx *mlx, char *map)
+int	is_wall(t_map *map, int y, int x)
 {
+	if (x == 0 || x == map->x_max || y == 0 || y == map->y_max)
+	{
+		if (map->map[y][x] != 1)
+		{
+			error_log("map needs rectangular outer wall!");
+			return (0);
+		}
+		else
+			return (1);
+	}
 }
 
 int	check_row(t_map *map)
@@ -32,15 +42,20 @@ int	check_row(t_map *map)
 				error_log("invalid character inside map!");
 				return (0);
 			}
-			if (i == 0 || i == y_max 
-
+			if (!is_wall(map, i, j))
+			{
+				return (0);
+			}
+			j++;
 		}
+		i++;
 	}
+	return (1);
 }
 
 void	get_size(t_map *map, char *map_dir)
 {
-	int	map_fd;
+	int		map_fd;
 	char	*tmp;
 
 	map_fd = open(map_dir, O_RDONLY);
@@ -93,13 +108,14 @@ void	store_map(t_mlx *mlx, char *map)
 	}
 	close(map_fd);
 }
+
 void	check_map(t_mlx *mlx, char *map_dir)
 {
 	get_size(mlx->map, map_dir);
 	if (mlx->map->x_max < 4 || mlx->map->y_max < 4)
 	{
 		if ((mlx->map->x_max == 3 && mlx->map->y_max < 5)
-				|| (mlx->map->y_max == 3 && mlx->map->x_max < 5))
+			|| (mlx->map->y_max == 3 && mlx->map->x_max < 5))
 		{
 			error_log("map too small!");
 			exit(0);

@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:26:49 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/14 14:05:58 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/15 14:06:36 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_mlx	*get_data(void)
 		mlx = ft_calloc(1, sizeof(t_mlx));
 		mlx->map = ft_calloc(1, sizeof(t_map));
 		mlx->ass = ft_calloc(1, sizeof(t_assets));
-		mlx->ass->wall = ft_calloc(4, sizeof(void));
+		mlx->ass->wall = ft_calloc(5, sizeof(void));
 		mlx->ass->corn = ft_calloc(4, sizeof(void));
 		mlx->ass->play = ft_calloc(4, sizeof(void));
 		mlx->map->coll_nb = 0;

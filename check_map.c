@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:03:27 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/15 08:51:55 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/18 12:11:24 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	check_row(t_map *map)
 			{
 				return (0);
 			}
+			set_origin();
 			j++;
 		}
 		i++;
@@ -112,21 +113,25 @@ void	store_map(t_mlx *mlx, char *map)
 void	check_map(t_mlx *mlx, char *map_dir)
 {
 	get_size(mlx->map, map_dir);
-	if (mlx->map->x_max < 4 || mlx->map->y_max < 4)
+	if ((mlx->map->x_max == 3 && mlx->map->y_max < 5)
+		|| (mlx->map->y_max == 3 && mlx->map->x_max < 5))
 	{
-		if ((mlx->map->x_max == 3 && mlx->map->y_max < 5)
-			|| (mlx->map->y_max == 3 && mlx->map->x_max < 5))
-		{
-			error_log("map too small!");
-			exit(0);
-		}
-		if (mlx->map->x_max < 4 && mlx->map->y_max < 4)
-		{
-			error_log("map too small!");
-			exit(0);
-		}
+		error_log("map too small!");
+		exit(0);
+	}
+	if (mlx->map->x_max < 4 && mlx->map->y_max < 4)
+	{
+		error_log("map too small!");
+		exit(0);
+	}
+	if (mlx->map->x_max > 30 || mlx->map->y_max > 16)
+	{
+		error_log("map too big for screen!");
+		exit(0);
 	}
 	store_map(mlx, map_dir);
 	if (!check_row(mlx->map))
+		clean_exit(mlx, 0);
+	if (!valid_map())
 		clean_exit(mlx, 0);
 }

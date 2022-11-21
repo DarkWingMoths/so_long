@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:43:51 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/05/22 15:05:54 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/20 20:30:27 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static size_t	breakdown(char const *s, char c)
 	return (w);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *s, char c)
 {
 	size_t	i;
 	size_t	len;

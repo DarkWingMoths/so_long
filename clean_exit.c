@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:36:48 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/14 12:57:48 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/20 15:54:15 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ void	clean_exit(t_mlx *mlx, int status)
 {	
 	int	i;
 
-	i = mlx->x_max;
+	i = mlx->map->x_max;
 	clean_assets(mlx->ass);
 	free(mlx->ass);
 	while (i >= 0)
 	{
-		if (mlx->map[i])
-			ft_bzero(mlx->map[i], ft_strlen(mlx->map[i]));
+		if (mlx->map->map[i])
+			ft_bzero(mlx->map->map[i], ft_strlen(mlx->map->map[i]));
 		i--;
 	}
 	free(mlx->ass);

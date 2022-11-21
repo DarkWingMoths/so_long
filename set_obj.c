@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 11:33:37 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/18 12:39:58 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/21 00:43:23 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,9 @@ void	set_assets(t_mlx *mlx)
 	mlx->ass->coll = mlx_xpm_file_to_image(mlx->mlx, \
 			"./assets/Collectible.xpm", \
 			&mlx->ass->x, &mlx->ass->y);
+	mlx->ass->exit = mlx_xpm_file_to_image(mlx->mlx, \
+			"./assets/Exit.xpm", &mlx->ass->x, \
+			&mlx->ass->y);
 }
 
 void	set_origin(void)

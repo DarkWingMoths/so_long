@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:51:16 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/14 16:16:25 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/19 10:17:13 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void	check_info(int ac, char *map_dir)
 			error_log("Not enough argument!");
 		exit(0);
 	}
+
 	check_type(map_dir);
 }

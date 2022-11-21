@@ -6,13 +6,13 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:48:17 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/05/18 16:47:17 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/20 20:29:12 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char *s1, char *set)
 {
 	size_t	index;
 	size_t	s1_len;

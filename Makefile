@@ -15,8 +15,9 @@ SRCS        :=         check_info.c \
 		       error.c \
 		       main.c \
 		       put_map.c \
+		       put_wall.c \
 		       set_obj.c \
-		       valid_map.c
+		       # valid_map.c
 
 OBJS        := $(SRCS:.c=.o)
 

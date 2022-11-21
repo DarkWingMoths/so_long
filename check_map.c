@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:03:27 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/18 12:11:24 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/21 00:28:09 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ int	is_wall(t_map *map, int y, int x)
 			error_log("map needs rectangular outer wall!");
 			return (0);
 		}
-		else
-			return (1);
 	}
+	return (1);
 }
 
 int	check_row(t_map *map)
@@ -35,6 +34,7 @@ int	check_row(t_map *map)
 	j = 0;
 	while (map->map[i])
 	{
+		printf("row to check map[%i] = %s\n", i, map->map[i]);
 		while (map->map[i][j])
 		{
 			if (!strrchr("10CEP", map->map[i][j]))
@@ -42,15 +42,15 @@ int	check_row(t_map *map)
 				error_log("invalid character inside map!");
 				return (0);
 			}
-			if (!is_wall(map, i, j))
-			{
+			printf("valid character\n");
+			printf("check for wall\n");
+			if (is_wall(map, i, j) == 0)
 				return (0);
-			}
-			set_origin();
 			j++;
 		}
 		i++;
 	}
+	set_origin();
 	return (1);
 }
 
@@ -59,6 +59,7 @@ void	get_size(t_map *map, char *map_dir)
 	int		map_fd;
 	char	*tmp;
 
+	printf("opening file %s\n", map_dir);
 	map_fd = open(map_dir, O_RDONLY);
 	if (map_fd == -1)
 	{
@@ -66,21 +67,31 @@ void	get_size(t_map *map, char *map_dir)
 		close(map_fd);
 		exit(0);
 	}
+	printf("file opened\n");
+	printf("check first line of %s\n", map_dir);
 	tmp = get_next_line(map_fd);
-	map->x_max = ft_strlen(tmp);
-	map->y_max = 0;
+	printf("first line checked\ntmp = %s\n", tmp);
+	map->x_max = ft_strlen(tmp) - 1;
+	map->y_max = -1;
 	while (tmp)
 	{
-		if (ft_strlen(tmp) != map->x_max)
+		if (tmp[ft_strlen(tmp)] == '\n')
+			tmp[ft_strlen(tmp)] = '\0';
+		if ((ft_strlen(tmp) - 1) != map->x_max)
 		{
 			error_log("bad map!");
 			close(map_fd);
 			exit(0);
 		}
+		printf("check next line...\n");
+		free(tmp);
 		tmp = get_next_line(map_fd);
+		printf("line checked\ntmp = %s\n", tmp);
 		map->y_max += 1;
 	}
 	close(map_fd);
+	free(tmp);
+	printf("x_max = %i\ny_max = %i\n", map->x_max, map->y_max);
 }
 
 void	store_map(t_mlx *mlx, char *map)
@@ -89,6 +100,7 @@ void	store_map(t_mlx *mlx, char *map)
 	int	map_fd;
 
 	i = 0;
+	printf("opening file ...\n");
 	map_fd = open(map, O_RDONLY);
 	if (map_fd == -1)
 	{
@@ -96,15 +108,18 @@ void	store_map(t_mlx *mlx, char *map)
 		close(map_fd);
 		exit(0);
 	}
-	mlx->map->map = ft_calloc(mlx->map->y_max, sizeof(char));
-	if (!mlx->map)
+	printf("file opened\n");
+	mlx->map->map = ft_calloc((mlx->map->y_max + 1), sizeof(char));
+	if (!mlx->map->map)
 		clean_exit(mlx, 0);
 	while (i <= mlx->map->y_max)
 	{
-		mlx->map->map[i] = ft_calloc(mlx->map->x_max, sizeof(char));
+		mlx->map->map[i] = ft_calloc((mlx->map->x_max + 1), sizeof(char));
 		if (!mlx->map->map[i])
-			clean_exit(mlx, 0);
+			exit (0);
+			/* clean_exit(mlx, 0); */
 		mlx->map->map[i] = get_next_line(map_fd);
+		printf("map[%i] = %s\n", i, mlx->map->map[i]);
 		i++;
 	}
 	close(map_fd);
@@ -112,7 +127,12 @@ void	store_map(t_mlx *mlx, char *map)
 
 void	check_map(t_mlx *mlx, char *map_dir)
 {
+	int	i;
+
+	i = 0;
+	printf("getting size\n{\n");
 	get_size(mlx->map, map_dir);
+	printf("}	get size done\n");
 	if ((mlx->map->x_max == 3 && mlx->map->y_max < 5)
 		|| (mlx->map->y_max == 3 && mlx->map->x_max < 5))
 	{
@@ -129,9 +149,18 @@ void	check_map(t_mlx *mlx, char *map_dir)
 		error_log("map too big for screen!");
 		exit(0);
 	}
+	printf("size valide\n");
+	printf("Storing map\n{\n");
 	store_map(mlx, map_dir);
-	if (!check_row(mlx->map))
-		clean_exit(mlx, 0);
-	if (!valid_map())
-		clean_exit(mlx, 0);
+	printf("}	map stored\n");
+	while (mlx->map->map[i])
+	{
+		printf("%s\n", mlx->map->map[i]);
+		i++;
+	}
+	printf("\nchecking row\n{\n");
+	/* if (!check_row(mlx->map)) */
+	/* 	clean_exit(mlx, 0); */
+	/* if (!valid_map()) */
+	/* 	clean_exit(mlx, 0); */
 }

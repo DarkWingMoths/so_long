@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:16:34 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/02 14:12:13 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/20 22:17:02 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ char	*get_line_out(char *store)
 	char	*line;
 
 	i = 0;
-	if (!store)
+	if (!store[i])
 		return (NULL);
-	while (!store[i] && store[i] != '\n')
+	while (store[i] && store[i] != '\n')
 		i++;
-	line = malloc(sizeof(char) * (i + 2));
+	line = ft_calloc((i + 2), sizeof(char));
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -33,10 +33,10 @@ char	*get_line_out(char *store)
 	}
 	if (store[i] == '\n')
 	{
-		line[i] = '\n';
+		/* line[i] = '\n'; */
 		i++;
 	}
-	line[i] = '\0';
+	line[i - 1] = '\0';
 	return (line);
 }
 
@@ -55,7 +55,7 @@ char	*keep_the_rest(char *store)
 		free(store);
 		return (NULL);
 	}
-	new_store = malloc(sizeof(char) * (ft_strlen(store) - i + 1));
+	new_store = ft_calloc((ft_strlen(store) - i + 1),sizeof(char));
 	if (!new_store)
 		return (NULL);
 	i++;
@@ -66,31 +66,47 @@ char	*keep_the_rest(char *store)
 	return (new_store);
 }
 
+char	*read_and_save(int fd, char *save)
+{
+	int			read_bytes;
+	char	*buff;
+
+	buff = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	if (!buff)
+		return (NULL);
+	read_bytes = 1;
+	while (!ft_strchr(save, '\n') && read_bytes != 0)
+	{
+		read_bytes = read(fd, buff, BUFFER_SIZE);
+		if (read_bytes == -1)
+		{
+			free (buff);
+			return (NULL);
+		}
+		buff[read_bytes] = '\0';
+		if (buff[0] != '\n')
+			printf("buffer = %s\n", buff);
+		save = ft_strjoin(save, buff);
+		printf("save = %s\n", save);
+	}
+	if (buff[0])
+		free (buff);
+	return (save);
+}
+
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*store[FOPEN_MAX];
-	int			read_bytes;
+	static char	*store[257];
 
-	read_bytes = 1;
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd > FOPEN_MAX)
+	printf("gnl line 75\n");
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	line = malloc(sizeof(char) * BUFFER_SIZE + 1);
-	if (!line)
-		return (NULL);
-	while (!ft_strchr(store[fd], '\n') && read_bytes != 0)
-	{
-		read_bytes = read(fd, line, BUFFER_SIZE);
-		if (read_bytes == -1)
-		{
-			free (line);
-			return (NULL);
-		}
-		line[read_bytes] = '\0';
-		store[fd] = ft_strjoin(store[fd], line);
-	}
-	free (line);
+	printf("gnl line 82\n");
+	store[fd] = read_and_save(fd, store[fd]);
+	printf("store[fd] = %s\n", store[fd]);
 	line = get_line_out(store[fd]);
 	store[fd] = keep_the_rest(store[fd]);
+	printf("line = %s\n", line);
 	return (line);
 }

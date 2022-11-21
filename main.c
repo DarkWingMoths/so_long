@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:26:49 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/15 14:06:36 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/20 16:07:24 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,14 @@ int	main(int ac, char **av)
 {
 	t_mlx		*mlx;
 
+	printf("check file\n{\n");
 	check_info(ac, av[1]);
+	printf("}	check file done\n");
 	mlx = get_data();
 	mlx->mlx = mlx_init();
+	printf("check and stock map\n{\n");
 	check_map(mlx, av[1]);
+	printf("}	check and stock map done\n");
 	put_map(mlx);
 	mlx_loop(mlx->mlx);
 }

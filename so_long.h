@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:21:47 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/20 15:00:56 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/22 10:43:58 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,6 @@
 # include "libft/libft.h"
 # include <stdlib.h>
 # include <fcntl.h>
-
-typedef struct s_assets {
-	void	*empty;
-	void	**wall;
-	void	**corn;
-	void	*coll;
-	void	**play;
-	void	*exit;
-	int	x;
-	int	y;
-}		t_assets;
 
 typedef struct s_map {
 	char	**map;
@@ -42,9 +31,16 @@ typedef struct s_map {
 typedef struct s_mlx {
 	void		*mlx;
 	void		*window;
+	void	*empty;
+	void	**wall;
+	void	**corn;
+	void	*coll;
+	void	**play;
+	void	*exit;
 	int		pos_x;
 	int		pos_y;
-	t_assets	*ass;
+	int	ass_x;
+	int	ass_y;
 	t_map		*map;
 }		t_mlx;
 
@@ -56,6 +52,6 @@ void	check_map(t_mlx *mlx, char *map_dir);
 void	clean_exit(t_mlx *mlx, int status);
 void	set_assets(t_mlx *mlx);
 void	set_origin(void);
-void	*put_wall(int x, int y, t_mlx *mlx);
+void	put_outer_wall(t_mlx *mlx);
 
 #endif

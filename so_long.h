@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:21:47 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/22 10:43:58 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/23 13:01:32 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,23 @@ typedef struct s_map {
 	int	y_max;
 }		t_map;
 
-typedef struct s_mlx {
-	void		*mlx;
-	void		*window;
+typedef struct s_assets {
 	void	*empty;
 	void	**wall;
 	void	**corn;
 	void	*coll;
 	void	**play;
-	void	*exit;
-	int		pos_x;
-	int		pos_y;
+	void	**exit;
 	int	ass_x;
 	int	ass_y;
+}		t_assets;
+
+typedef struct s_mlx {
+	void		*mlx;
+	void		*window;
+	int		pos_x;
+	int		pos_y;
+	t_assets	*ass;
 	t_map		*map;
 }		t_mlx;
 

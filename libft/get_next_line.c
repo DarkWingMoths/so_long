@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:16:34 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/20 22:17:02 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/23 10:26:54 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,7 @@ char	*read_and_save(int fd, char *save)
 			return (NULL);
 		}
 		buff[read_bytes] = '\0';
-		if (buff[0] != '\n')
-			printf("buffer = %s\n", buff);
 		save = ft_strjoin(save, buff);
-		printf("save = %s\n", save);
 	}
 	if (buff[0])
 		free (buff);
@@ -99,14 +96,10 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char	*store[257];
 
-	printf("gnl line 75\n");
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	printf("gnl line 82\n");
 	store[fd] = read_and_save(fd, store[fd]);
-	printf("store[fd] = %s\n", store[fd]);
 	line = get_line_out(store[fd]);
 	store[fd] = keep_the_rest(store[fd]);
-	printf("line = %s\n", line);
 	return (line);
 }

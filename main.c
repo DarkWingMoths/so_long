@@ -6,12 +6,18 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:26:49 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/27 04:03:34 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/28 15:13:04 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx.h"
 #include "so_long.h"
+
+int	end_game(t_mlx *mlx)
+{
+	mlx_destroy_window(mlx->mlx, mlx->window);
+	clean_exit(mlx->mlx, 1);
+	return (0);
+}
 
 t_mlx	*get_data(void)
 {
@@ -29,6 +35,7 @@ t_mlx	*get_data(void)
 		mlx->map->coll_nb = 0;
 		mlx->map->exit_nb = 0;
 		mlx->map->start_nb = 0;
+		mlx->end_flag = 0;
 	}
 	return (mlx);
 }
@@ -45,7 +52,7 @@ int	main(int ac, char **av)
 	check_map(mlx, av[1]);
 	put_map(mlx);
 	mlx_string_put(mlx->mlx, mlx->window, 20, 20, color_int, "number of movement :");
+	mlx_hook(mlx->window, 17, 0L, end_game, mlx); 
 	mlx_key_hook(mlx->window, check_action, mlx);
-	mlx_mouse_hook(mlx->window, check_action, mlx);
 	mlx_loop(mlx->mlx);
 }

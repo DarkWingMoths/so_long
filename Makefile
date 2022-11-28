@@ -9,15 +9,16 @@ FLAGS    := -Wall -Wextra -Werror
 #                                 PROGRAM'S SRCS                               #
 ################################################################################
 
-SRCS        :=         check_info.c \
+SRCS        :=         check_action.c \
+		       check_info.c \
 		       check_map.c \
 		       clean_exit.c \
 		       error.c \
 		       main.c \
 		       put_map.c \
 		       set_obj.c \
-		       put_wall.c 
-		       # valid_map.c
+		       put_wall.c \
+		       valid_map.c
 
 OBJS        := $(SRCS:.c=.o)
 

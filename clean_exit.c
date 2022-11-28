@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:36:48 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/22 10:28:51 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/27 03:36:31 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	clean_exit(t_mlx *mlx, int status)
 {	
 	int	i;
 
-	i = mlx->map->x_max;
+	i = mlx->map->y_max;
 	while (i >= 0)
 	{
 		if (mlx->map->map[i])
@@ -24,6 +24,7 @@ void	clean_exit(t_mlx *mlx, int status)
 		i--;
 	}
 	free(mlx->map);
+	free(mlx->ass);
 	free(mlx);
 	exit(status);
 }

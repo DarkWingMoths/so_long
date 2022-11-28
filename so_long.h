@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:21:47 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/23 13:01:32 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/27 04:13:23 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_mlx {
 	void		*window;
 	int		pos_x;
 	int		pos_y;
+	int		mov_nb;
 	t_assets	*ass;
 	t_map		*map;
 }		t_mlx;
@@ -57,5 +58,6 @@ void	clean_exit(t_mlx *mlx, int status);
 void	set_assets(t_mlx *mlx);
 void	set_origin(void);
 void	put_outer_wall(t_mlx *mlx);
+int	check_action(int key, t_mlx *mlx);
 
 #endif

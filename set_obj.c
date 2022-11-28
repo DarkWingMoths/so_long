@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 11:33:37 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/23 13:08:48 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/25 18:01:40 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,11 @@ void	set_origin(void)
 	int		y;
 
 	mlx = get_data();
-	x = 0;
 	y = 0;
-	while (mlx->map->map[y])
+	while (y <= mlx->map->y_max)
 	{
-		while (mlx->map->map[y][x])
+		x = 0;
+		while (x <= mlx->map->x_max)
 		{
 			if (mlx->map->map[y][x] == 'P')
 			{
@@ -100,8 +100,9 @@ void	set_origin(void)
 				mlx->map->coll_nb++;
 			else if (mlx->map->map[y][x] == 'E')
 				mlx->map->exit_nb++;
+			x++;
 		}
-		x++;
+		y++;
 	}
-	y++;
+	printf("variables set :\nstart = %i\npos_x = %i\npos_y = %i\nCollectibles = %i\nexit = %i\n", mlx->map->start_nb, mlx->pos_x, mlx->pos_y, mlx->map->coll_nb, mlx->map->exit_nb);
 }

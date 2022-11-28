@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 09:52:50 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/23 14:48:15 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/27 04:33:06 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	*put_img(char img, int x, int y, t_mlx *mlx)
 	{
 		mlx_put_image_to_window(mlx->mlx, mlx->window, \
 				mlx->ass->empty, x * 64, y *64);
+		mlx->map->map[y][x] = '0';
 		return (mlx->ass->play[3]);
 	}
 	else if (img == 'C')
@@ -46,7 +47,6 @@ void	put_map(t_mlx *mlx)
 	set_assets(mlx);
 	mlx->window = mlx_new_window(mlx->mlx, ((mlx->map->x_max + 1) * 64), \
 			((mlx->map->y_max + 1) * 64), "so_long mgagnon");
-	/* mlx->window = mlx_new_window(mlx->mlx, 640, 576, "so_long mgagnon"); */
 	put_outer_wall(mlx);
 	while (y < mlx->map->y_max)
 	{

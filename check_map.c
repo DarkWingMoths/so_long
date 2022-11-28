@@ -6,20 +6,28 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:03:27 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/23 12:20:51 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/26 16:37:11 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	is_wall(t_map *map, int y, int x)
+int	check_wall(t_map *map)
 {
-	if (x == 0 || x == map->x_max || y == 0 || y == map->y_max)
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y <= map->y_max)
 	{
-		if (map->map[y][x] != 1)
+		x = 0;
+		while (x <= map->x_max)
 		{
-			error_log("map needs rectangular outer wall!");
-			return (0);
+			if (map->map[y][x] != '1')
+			{
+				error_log("map needs rectangular outer wall!");
+				return (0);
+			}
 		}
 	}
 	return (1);
@@ -27,25 +35,23 @@ int	is_wall(t_map *map, int y, int x)
 
 int	check_row(t_map *map)
 {
-	int	i;
-	int	j;
+	int	x;
+	int	y;
 
-	i = 0;
-	j = 0;
-	while (map->map[i])
+	y = 0;
+	while (y <= map->y_max)
 	{
-		while (map->map[i][j])
+		x = 0;
+		while (map->map[y][x] || x <= map->x_max)
 		{
-			if (!strrchr("10CEP", map->map[i][j]))
+			if (!strrchr("10CEP", map->map[y][x]))
 			{
 				error_log("invalid character inside map!");
 				return (0);
 			}
-			if (is_wall(map, i, j) == 0)
-				return (0);
-			j++;
+			x++;
 		}
-		i++;
+		y++;
 	}
 	set_origin();
 	return (1);
@@ -114,10 +120,8 @@ void	store_map(t_mlx *mlx, char *map)
 
 void	check_map(t_mlx *mlx, char *map_dir)
 {
-	int	i;
-
-	i = 0;
 	get_size(mlx->map, map_dir);
+	printf("size = %iX%i\n", mlx->map->x_max, mlx->map->y_max);
 	if ((mlx->map->x_max == 3 && mlx->map->y_max < 5)
 		|| (mlx->map->y_max == 3 && mlx->map->x_max < 5))
 	{
@@ -135,8 +139,10 @@ void	check_map(t_mlx *mlx, char *map_dir)
 		exit(0);
 	}
 	store_map(mlx, map_dir);
-	/* if (!check_row(mlx->map)) */
+	/* if (!check_wall(mlx->map)) */
 	/* 	clean_exit(mlx, 0); */
+	if (!check_row(mlx->map))
+		clean_exit(mlx, 0);
 	/* if (!valid_map()) */
 	/* 	clean_exit(mlx, 0); */
 }

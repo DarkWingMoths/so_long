@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:03:03 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/20 15:56:48 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/26 17:09:07 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	flood(t_map *map, int x, int y)
 int	valid_map(void)
 {
 	t_mlx	*mlx;
-	char	map[mlx->map->y_max][mlx->map->x_max];
 
 	mlx = get_data();
 	if (mlx->map->exit_nb != 1 || mlx->map->start_nb != 1 || \

@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:03:03 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/26 17:09:07 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/29 20:46:53 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	flood(t_map *map, int x, int y)
 
 	if (!coll_nb)
 		coll_nb = map->coll_nb;
-	if ((x >= 0 || x <= map->x_max) && (y >= 0 || y <= map->y_max))
+	if (x >= 0 && x <= map->x_max && y >= 0 && y <= map->y_max)
 	{
 		if (map->map[y][x] != 'D')
 		{
@@ -27,8 +27,8 @@ int	flood(t_map *map, int x, int y)
 			else if (map->map[y][x] == '1')
 				return (coll_nb);
 			else if (map->map[y][x] == 'E' && map->coll_nb == 0)
-				return (coll_nb);
-			if (map->map[y][x] != 'E' || map->map[y][x] != '1')
+				map->exit_check--;
+			if (map->map[y][x] != '1')
 				map->map[y][x] = 'D';
 		}
 		flood(map, (x + 1), y);
@@ -50,6 +50,11 @@ int	valid_map(void)
 		return (0);
 	}
 	if (flood(mlx->map, mlx->pos_x, mlx->pos_y) != 0)
+	{
+		error_log("no valid path!");
+		return (0);
+	}
+	else if (mlx->map->exit_check != 0)
 	{
 		error_log("no valid path!");
 		return (0);

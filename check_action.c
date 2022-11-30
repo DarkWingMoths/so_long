@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 12:11:37 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/28 15:38:37 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/29 21:21:52 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	print_new(t_mlx *mlx, void *base, int dir)
 {
 }
 
-void	do_act(t_mlx *mlx, int dir)
+void	do_act(t_mlx *mlx, int dir, int x, int y)
 {
 	char	new_pos;
 
@@ -32,7 +32,9 @@ void	do_act(t_mlx *mlx, int dir)
 		if (mlx->map->coll_nb == 0)
 		{
 			mlx->end_flag = 1;
-			mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->ass->exit[1], 0, 0);
+			mlx_put_image_to_window(mlx->mlx, mlx->window, \
+					mlx->ass->exit[1], mlx->map->ex_x * \
+					64, mlx->map->ex_y * 64);
 		}
 		new_pos = '0';
 	}
@@ -42,6 +44,7 @@ void	do_act(t_mlx *mlx, int dir)
 		print_new(mlx, mlx->ass->exit[0], dir);
 		if (mlx->end_flag == 1)
 			end_game(mlx);
+		return;
 	}
 }
 
@@ -69,15 +72,26 @@ int	get_dir(int key)
 
 int	check_action(int key, t_mlx *mlx)
 {
+	int	x;
+	int	y;
 	int	dir;
 
-	write(1, "\n", 1);
+	x = 0;
+	y = 0;
 	dir = get_dir(key);
+	if (dir == 0)
+		y = -1;
+	else if (dir == 1)
+		y = 1;
+	else if (dir == 2)
+		x = -1;
+	else if (dir == 3)
+		x = 1;
 	/* if (key == 65307) LINUX*/
 		/* clean_exit(mlx, 1); */
 	if (key == 53) /*MacOS*/
 		clean_exit(mlx, 1);
 	else
-		do_act(mlx, dir);
+		do_act(mlx, dir, x, y);
 	return (0);
 }

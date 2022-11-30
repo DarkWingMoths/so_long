@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:21:47 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/28 15:15:21 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/29 20:44:03 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ typedef struct s_map {
 	int	start_nb;
 	int	x_max;
 	int	y_max;
+	int	ex_x;
+	int	ex_y;
+	int	exit_check;
 }		t_map;
 
 typedef struct s_assets {

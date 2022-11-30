@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 11:33:37 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/25 18:01:40 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/29 20:47:51 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,25 @@ void	set_assets(t_mlx *mlx)
 			&mlx->ass->ass_y);
 }
 
+void	is_what(t_mlx *mlx, int x, int y)
+{
+	if (mlx->map->map[y][x] == 'P')
+	{
+		mlx->pos_x = x;
+		mlx->pos_y = y;
+		mlx->map->start_nb++;
+	}
+	else if (mlx->map->map[y][x] == 'C')
+		mlx->map->coll_nb++;
+	else if (mlx->map->map[y][x] == 'E')
+	{
+		mlx->map->ex_x = x;
+		mlx->map->ex_y = y;
+		mlx->map->exit_check = 1;
+		mlx->map->exit_nb++;
+	}
+}
+
 void	set_origin(void)
 {
 	t_mlx	*mlx;
@@ -90,19 +109,9 @@ void	set_origin(void)
 		x = 0;
 		while (x <= mlx->map->x_max)
 		{
-			if (mlx->map->map[y][x] == 'P')
-			{
-				mlx->pos_x = x;
-				mlx->pos_y = y;
-				mlx->map->start_nb++;
-			}
-			else if (mlx->map->map[y][x] == 'C')
-				mlx->map->coll_nb++;
-			else if (mlx->map->map[y][x] == 'E')
-				mlx->map->exit_nb++;
+			is_what(mlx, x, y);
 			x++;
 		}
 		y++;
 	}
-	printf("variables set :\nstart = %i\npos_x = %i\npos_y = %i\nCollectibles = %i\nexit = %i\n", mlx->map->start_nb, mlx->pos_x, mlx->pos_y, mlx->map->coll_nb, mlx->map->exit_nb);
 }

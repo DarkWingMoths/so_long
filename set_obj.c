@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 11:33:37 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/29 20:47:51 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/30 11:38:55 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	is_what(t_mlx *mlx, int x, int y)
 	{
 		mlx->map->ex_x = x;
 		mlx->map->ex_y = y;
-		mlx->map->exit_check = 1;
+		mlx->map->exit_check = 0;
 		mlx->map->exit_nb++;
 	}
 }

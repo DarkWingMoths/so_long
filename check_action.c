@@ -6,11 +6,10 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 12:11:37 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/29 21:21:52 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/30 10:54:40 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "so_long.h"
 
 void	print_old(t_mlx *mlx, void *base)

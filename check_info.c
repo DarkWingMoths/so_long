@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:51:16 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/19 10:17:13 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/30 11:46:19 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	check_type(char *map_dir)
 		exit(0);
 	}
 	map_dir = ft_strrchr(map_dir, '.');
-	while(ft_strlen(map_dir) != 4 && !map_dir)
+	while(ft_strlen(map_dir) != 4)
 	{
 		map_dir = ft_strrchr(++map_dir, '.');
 	}

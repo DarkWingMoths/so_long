@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:03:27 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/26 16:37:11 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/11/30 13:26:02 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,17 @@ int	check_wall(t_map *map)
 				error_log("map needs rectangular outer wall!");
 				return (0);
 			}
+			if (y != 0 && y != map->y_max)
+			{
+				if (x != map->x_max)
+					x = map->x_max;
+				else
+					x++;
+			}
+			else
+				x++;
 		}
+		y++;
 	}
 	return (1);
 }
@@ -111,7 +121,6 @@ void	store_map(t_mlx *mlx, char *map)
 		mlx->map->map[i] = ft_calloc((mlx->map->x_max + 1), sizeof(char *));
 		if (!mlx->map->map[i])
 			exit (0);
-			/* clean_exit(mlx, 0); */
 		mlx->map->map[i] = get_next_line(map_fd);
 		i++;
 	}
@@ -139,10 +148,10 @@ void	check_map(t_mlx *mlx, char *map_dir)
 		exit(0);
 	}
 	store_map(mlx, map_dir);
-	/* if (!check_wall(mlx->map)) */
-	/* 	clean_exit(mlx, 0); */
+	if (!check_wall(mlx->map))
+		clean_exit(mlx, 0);
 	if (!check_row(mlx->map))
 		clean_exit(mlx, 0);
-	/* if (!valid_map()) */
-	/* 	clean_exit(mlx, 0); */
+	if (!valid_map())
+		clean_exit(mlx, 0);
 }

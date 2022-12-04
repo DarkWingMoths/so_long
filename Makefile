@@ -56,7 +56,7 @@ $(NAME): ${OBJS}
 			@ cp ./mlx/libmlx.a .
 			@ $(MAKE) -C libft/
 			@ cp ./libft/libft.a .
-			$(CC) $(CFLAGS) -g3 -Ofast -o $(NAME) -Imlx $(OBJS) libft.a -Lmlx -lmlx -lm -framework OpenGL -framework AppKit
+			$(CC) $(FLAGS) -g3 -Ofast -o $(NAME) -Imlx $(OBJS) libft.a -Lmlx -lmlx -lm -framework OpenGL -framework AppKit
 			@echo "$(GREEN)$(NAME) created[0m ✔️"
 endif
 
@@ -67,7 +67,7 @@ $(NAME): ${OBJS}
 			@ $(MAKE) -C mlx_linux all
 			@ $(MAKE) -C libft/
 			@ cp ./libft/libft.a .
-			$(CC) $(CFLAGS) -g3 -o $(NAME) $(OBJS) libft.a -Imlx_linux -Lmlx_linux -lmlx -lmlx_Linux -L/usr/lib -lXext -lX11 -lm
+			$(CC) $(FLAGS) -g3 -o $(NAME) $(OBJS) libft.a -Imlx_linux -Lmlx_linux -lmlx -lmlx_Linux -L/usr/lib -lXext -lX11 -lm
 			@echo "$(GREEN)$(NAME) created[0m ✔️"
 endif
 

@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:36:48 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/27 03:36:31 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/12/03 21:40:42 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ void	clean_exit(t_mlx *mlx, int status)
 		i--;
 	}
 	free(mlx->map);
+	free(mlx->ass->wall);
+	free(mlx->ass->corn);
+	free(mlx->ass->play);
+	free(mlx->ass->exit);
 	free(mlx->ass);
 	free(mlx);
 	exit(status);

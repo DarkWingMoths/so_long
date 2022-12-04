@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:26:49 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/30 13:32:48 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/12/03 21:33:04 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ int	main(int ac, char **av)
 	put_map(mlx);
 	mlx_string_put(mlx->mlx, mlx->window, 20, 20, color_int, "number of movement :");
 	mlx_hook(mlx->window, 17, 0L, end_game, mlx); 
-	/* mlx_key_hook(mlx->window, check_action, mlx); */
+	mlx_key_hook(mlx->window, check_action, mlx);
 	mlx_loop(mlx->mlx);
 }

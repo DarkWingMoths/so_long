@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 12:11:37 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/12/03 20:35:32 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/12/04 15:59:33 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,22 +95,22 @@ void	do_act(t_mlx *mlx, int dir, int x, int y)
 
 int	get_dir(int key)
 {
-	/* if (key == 13 || key == 126) MacOS*/
-	/* 	return (0);*/
-	/* else if (key == 1 || key == 125) MacOS*/
-	/* 	return (1);*/
-	/* else if (key == 0 || key == 123) MacOS*/
-	/* 	return (2);*/
-	/* else if (key == 2 || key == 124) MacOS*/
-	/* 	return (3);*/
-	if (key == 119 || key == 65362) /*LINUX*/
+	if (key == 13 || key == 126) /*MacOS*/
 		return (0);
-	else if (key == 115 || key == 65364) /*LINUX*/
+	else if (key == 1 || key == 125) /*MacOS*/
 		return (1);
-	else if (key == 97 || key == 65361) /*LINUX*/
+	else if (key == 0 || key == 123) /*MacOS*/
 		return (2);
-	else if (key == 100 || key == 65363) /*LINUX*/
+	else if (key == 2 || key == 124) /*MacOS*/
 		return (3);
+	/* if (key == 119 || key == 65362) LINUX*/
+	/* 	return (0);*/
+	/* else if (key == 115 || key == 65364) LINUX*/
+	/* 	return (1);*/
+	/* else if (key == 97 || key == 65361) LINUX*/
+	/* 	return (2);*/
+	/* else if (key == 100 || key == 65363) LINUX*/
+	/* 	return (3);*/
 	else
 		return (10);
 }
@@ -123,10 +123,10 @@ int	check_action(int key, t_mlx *mlx)
 
 	x = 0;
 	y = 0;
-	if (key == 65307) /*LINUX*/
-		clean_exit(mlx, 1); 
-	/* if (key == 53) MacOS*/
-	/* 	clean_exit(mlx, 1);*/
+	/* if (key == 65307) LINUX*/
+	/* 	clean_exit(mlx, 1);*/ 
+	if (key == 53) /*MacOS*/
+		clean_exit(mlx, 1);
 	dir = get_dir(key);
 	if (dir == 0)
 		y = -1;

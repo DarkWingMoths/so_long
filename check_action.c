@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 12:11:37 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/12/04 15:59:33 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/12/05 16:59:43 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,24 +73,31 @@ void	do_act(t_mlx *mlx, int dir, int x, int y)
 					mlx->ass->exit[1], mlx->map->ex_x * \
 					64, mlx->map->ex_y * 64);
 		}
-		new_pos = '0';
+		 mlx->map->map[mlx->pos_y + y][mlx->pos_x + x] = '0';
 	}
 	else if (new_pos == 'E')
 	{
 		print_old(mlx);
 		print_new(mlx, mlx->ass->exit[0], dir);
+		mlx->pos_x += x;
+		mlx->pos_y += y;
 		if (mlx->end_flag == 1)
 			end_game(mlx);
 		return;
 	}
 	else if (new_pos == '1')
 	{
-		mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->ass->empty, mlx->pos_x * 64, mlx->pos_y * 64);
+		if (mlx->map->map[mlx->pos_y][mlx->pos_x] == 'E')
+			mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->ass->exit[0], mlx->pos_x * 64, mlx->pos_y * 64);
+		else
+			mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->ass->empty, mlx->pos_x * 64, mlx->pos_y * 64);
 		mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->ass->play[dir], mlx->pos_x * 64, mlx->pos_y * 64);
 		return;
 	}
 	print_old(mlx);
 	print_new(mlx, mlx->ass->empty, dir);
+	mlx->pos_x += x;
+	mlx->pos_y += y;
 }
 
 int	get_dir(int key)
@@ -137,7 +144,5 @@ int	check_action(int key, t_mlx *mlx)
 	else if (dir == 3)
 		x = 1;
 	do_act(mlx, dir, x, y);
-	mlx->pos_x += x;
-	mlx->pos_y += y;
 	return (0);
 }

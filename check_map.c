@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:03:27 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/12/05 14:52:00 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/12/07 10:03:33 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void	store_map(t_mlx *mlx, char *map)
 void	check_map(t_mlx *mlx, char *map_dir)
 {
 	get_size(mlx->map, map_dir);
-	printf("size = %iX%i\n", mlx->map->x_max, mlx->map->y_max);
+	printf("size = %iX%i\n", mlx->map->x_max + 1, mlx->map->y_max + 1);
 	if ((mlx->map->x_max == 3 && mlx->map->y_max < 5)
 		|| (mlx->map->y_max == 3 && mlx->map->x_max < 5))
 	{
@@ -142,7 +142,7 @@ void	check_map(t_mlx *mlx, char *map_dir)
 		error_log("map too small!");
 		exit(0);
 	}
-	if (mlx->map->x_max > 30 || mlx->map->y_max > 16)
+	if (mlx->map->x_max > 39 || mlx->map->y_max > 19)
 	{
 		error_log("map too big for screen!");
 		exit(0);

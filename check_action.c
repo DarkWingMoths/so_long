@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 12:11:37 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/12/05 16:59:43 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/12/06 16:10:33 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	do_act(t_mlx *mlx, int dir, int x, int y)
 		print_new(mlx, mlx->ass->exit[0], dir);
 		mlx->pos_x += x;
 		mlx->pos_y += y;
+		mlx->mov_nb++;
 		if (mlx->end_flag == 1)
 			end_game(mlx);
 		return;
@@ -98,6 +99,7 @@ void	do_act(t_mlx *mlx, int dir, int x, int y)
 	print_new(mlx, mlx->ass->empty, dir);
 	mlx->pos_x += x;
 	mlx->pos_y += y;
+	mlx->mov_nb++;
 }
 
 int	get_dir(int key)
@@ -144,5 +146,6 @@ int	check_action(int key, t_mlx *mlx)
 	else if (dir == 3)
 		x = 1;
 	do_act(mlx, dir, x, y);
+	printf("number of move = %u\n", mlx->mov_nb);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:26:49 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/12/07 10:20:22 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/12/10 16:58:19 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*str_to_win(char *str)
 	mlx = get_data();
 	nb = ft_itoa(mlx->mov_nb);
 	ret = ft_strjoin(str, nb);
+	free(nb);
 	return (ret);
 }
 

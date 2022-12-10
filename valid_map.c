@@ -6,11 +6,24 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:03:03 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/30 13:14:24 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/12/10 16:33:52 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	free_map(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (i <= map->y_max)
+	{
+		free(map->map_dup[i]);
+		i++;
+	}
+	free(map->map_dup);
+}
 
 char	**map_cpy(t_map *map)
 {
@@ -30,25 +43,24 @@ char	**map_cpy(t_map *map)
 int	flood(t_map *map, int x, int y)
 {
 	static int	coll_nb = -1;
-	static char	**map_dup;
 
 	if (coll_nb == -1)
 		coll_nb = map->coll_nb;
-	if (!map_dup)
-		map_dup = map_cpy(map);
+	if (!map->map_dup)
+		map->map_dup = map_cpy(map);
 	if (x >= 0 && x <= map->x_max && y >= 0 && y <= map->y_max)
 	{
-		if (map_dup[y][x] == 'D')
+		if (map->map_dup[y][x] == 'D')
 			return (coll_nb);
 		else
 		{
-			if (map_dup[y][x] == 'C')
+			if (map->map_dup[y][x] == 'C')
 				coll_nb--;
-			else if (map_dup[y][x] == '1')
+			else if (map->map_dup[y][x] == '1')
 				return (coll_nb);
-			else if (map_dup[y][x] == 'E')
+			else if (map->map_dup[y][x] == 'E')
 				map->exit_check++;
-			map_dup[y][x] = 'D';
+			map->map_dup[y][x] = 'D';
 		}
 		flood(map, (x + 1), y);
 		flood(map, x, (y + 1));
@@ -78,5 +90,6 @@ int	valid_map(void)
 		error_log("no valid path!");
 		return (0);
 	}
+	free_map(mlx->map);
 	return (1);
 }

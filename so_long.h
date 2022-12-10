@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:21:47 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/12/07 11:30:22 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/12/10 16:30:32 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@
 
 typedef struct s_map {
 	char	**map;
+	char	**map_dup;
 	int	coll_nb;
 	int	exit_nb;
 	int	start_nb;

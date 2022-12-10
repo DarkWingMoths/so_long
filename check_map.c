@@ -6,10 +6,11 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:03:27 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/12/07 10:03:33 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/12/10 16:55:39 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/libft.h"
 #include "so_long.h"
 
 int	check_wall(t_map *map)
@@ -92,11 +93,13 @@ void	get_size(t_map *map, char *map_dir)
 			close(map_fd);
 			exit(0);
 		}
+		ft_bzero(tmp, ft_strlen(tmp));
 		free(tmp);
 		tmp = get_next_line(map_fd);
 		map->y_max += 1;
 	}
 	close(map_fd);
+	ft_bzero(tmp, ft_strlen(tmp));
 	free(tmp);
 }
 
@@ -120,7 +123,7 @@ void	store_map(t_mlx *mlx, char *map)
 	{
 		mlx->map->map[i] = ft_calloc((mlx->map->x_max + 1), sizeof(char *));
 		if (!mlx->map->map[i])
-			exit (0);
+			exit(0);
 		mlx->map->map[i] = get_next_line(map_fd);
 		i++;
 	}

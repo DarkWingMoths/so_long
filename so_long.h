@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:21:47 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/12/12 17:16:54 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/12/12 17:49:37 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,41 +15,41 @@
 
 # ifndef UP
 #  ifdef __linux__
-#   define UP = "119"
+#   define UP 119
 #  else
-#   define UP = "13"
+#   define UP 13
 #  endif
 # endif
 
 # ifndef DOWN
 #  ifdef __linux__
-#   define DOWN = "115"
+#   define DOWN 115
 #  else
-#   define DOWN = 1
+#   define DOWN 1
 #  endif
 # endif
 
 # ifndef LEFT
 #  ifdef __linux__
-#   define LEFT = 97
+#   define LEFT 97
 #  else
-#   define LEFT = 0
+#   define LEFT 0
 #  endif
 # endif
 
 # ifndef RIGHT
 #  ifdef __linux__
-#   define RIGHT = 100
+#   define RIGHT 100
 #  else
-#   define RIGHT = 2
+#   define RIGHT 2
 #  endif
 # endif
 
 # ifndef ESC
 #  ifdef __linux__
-#   define ESC = 65307
+#   define ESC 65307
 #  else
-#   define ESC = 53
+#   define ESC 53
 #  endif
 # endif
 

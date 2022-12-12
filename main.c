@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:26:49 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/12/12 17:13:44 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/12/12 17:52:15 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	main(int ac, char **av)
 	int	color_int;
 	char	*str;
 
-	/* printf("up = %d\n", UP); */
+	printf("up = %d\n", UP);
 	str = "number of movement = ";
 	color_int = 1102884;
 	check_info(ac, av[1]);

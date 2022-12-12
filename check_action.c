@@ -6,9 +6,49 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 12:11:37 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/12/06 16:10:33 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/12/12 17:21:12 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef UP
+# ifdef __linux__
+#  define UP = 119
+# else
+#  define UP = 13
+# endif
+#endif
+
+#ifndef DOWN
+# ifdef __linux__
+#  define DOWN = 115
+# else
+#  define DOWN = 1
+# endif
+#endif
+
+#ifndef LEFT
+# ifdef __linux__
+#  define LEFT = 97
+# else
+#  define LEFT = 0
+# endif
+#endif
+
+#ifndef RIGHT
+# ifdef __linux__
+#  define RIGHT = 100
+# else
+#  define RIGHT = 2
+# endif
+#endif
+
+#ifndef ESC
+# ifdef __linux__
+#  define ESC = 65307
+# else
+#  define ESC = 53
+# endif
+#endif
 
 #include "so_long.h"
 
@@ -104,13 +144,13 @@ void	do_act(t_mlx *mlx, int dir, int x, int y)
 
 int	get_dir(int key)
 {
-	if (key == 13 || key == 126) /*MacOS*/
+	if (key == UP)
 		return (0);
-	else if (key == 1 || key == 125) /*MacOS*/
+	else if (key == DOWN)
 		return (1);
-	else if (key == 0 || key == 123) /*MacOS*/
+	else if (key == LEFT)
 		return (2);
-	else if (key == 2 || key == 124) /*MacOS*/
+	else if (key == RIGHT)
 		return (3);
 	/* if (key == 119 || key == 65362) LINUX*/
 	/* 	return (0);*/

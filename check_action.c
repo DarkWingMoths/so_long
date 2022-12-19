@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 12:11:37 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/12/12 17:51:00 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/12/19 14:57:31 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,9 +124,7 @@ int	check_action(int key, t_mlx *mlx)
 
 	x = 0;
 	y = 0;
-	/* if (key == 65307) LINUX*/
-	/* 	clean_exit(mlx, 1);*/ 
-	if (key == 53) /*MacOS*/
+	if (key == ESC)
 		clean_exit(mlx, 1);
 	dir = get_dir(key);
 	if (dir == 0)
@@ -138,6 +136,6 @@ int	check_action(int key, t_mlx *mlx)
 	else if (dir == 3)
 		x = 1;
 	do_act(mlx, dir, x, y);
-	printf("number of move = %u\n", mlx->mov_nb);
+	printf("\rnumber of move = %u\n", mlx->mov_nb);
 	return (0);
 }

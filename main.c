@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:26:49 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/12/12 17:52:15 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/12/19 14:54:52 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ char	*str_to_win(char *str)
 
 int	end_game(t_mlx *mlx)
 {
-	printf("final move count = %u\n", mlx->mov_nb);
-	mlx_destroy_window(mlx->mlx, mlx->window);
+	printf("\rfinal move count = %u\n", mlx->mov_nb);
 	clean_exit(mlx, 1);
 	return (0);
 }
@@ -61,7 +60,6 @@ int	main(int ac, char **av)
 	int	color_int;
 	char	*str;
 
-	printf("up = %d\n", UP);
 	str = "number of movement = ";
 	color_int = 1102884;
 	check_info(ac, av[1]);
@@ -70,7 +68,7 @@ int	main(int ac, char **av)
 	check_map(mlx, av[1]);
 	put_map(mlx);
 	/* mlx_string_put(mlx->mlx, mlx->window, 20, 20, color_int, str_to_win(str)); */
-	mlx_hook(mlx->window, 17, 0L, end_game, mlx); 
+	mlx_hook(mlx->window, CLOSE, 0L, end_game, mlx); 
 	mlx_key_hook(mlx->window, check_action, mlx);
 	mlx_loop(mlx->mlx);
 	free(str);

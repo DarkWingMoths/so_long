@@ -6,11 +6,10 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:03:27 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/12/10 16:55:39 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/12/20 16:03:29 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "so_long.h"
 
 int	check_wall(t_map *map)
@@ -68,7 +67,7 @@ int	check_row(t_map *map)
 	return (1);
 }
 
-void	get_size(t_map *map, char *map_dir)
+int	get_size(t_map *map, char *map_dir)
 {
 	int		map_fd;
 	char	*tmp;
@@ -78,7 +77,7 @@ void	get_size(t_map *map, char *map_dir)
 	{
 		error_log("loading map!");
 		close(map_fd);
-		exit(0);
+		return(0);
 	}
 	tmp = get_next_line(map_fd);
 	map->x_max = ft_strlen(tmp) - 1;
@@ -91,7 +90,7 @@ void	get_size(t_map *map, char *map_dir)
 		{
 			error_log("bad map!");
 			close(map_fd);
-			exit(0);
+			break;
 		}
 		ft_bzero(tmp, ft_strlen(tmp));
 		free(tmp);
@@ -114,16 +113,16 @@ void	store_map(t_mlx *mlx, char *map)
 	{
 		error_log("loading map!");
 		close(map_fd);
-		exit(0);
+		exit(1);
 	}
 	mlx->map->map = ft_calloc((mlx->map->y_max + 1), sizeof(char *));
 	if (!mlx->map->map)
-		clean_exit(mlx, 0);
+		clean_exit(mlx, 1);
 	while (i <= mlx->map->y_max)
 	{
 		mlx->map->map[i] = ft_calloc((mlx->map->x_max + 1), sizeof(char *));
 		if (!mlx->map->map[i])
-			exit(0);
+			exit(1);
 		mlx->map->map[i] = get_next_line(map_fd);
 		i++;
 	}
@@ -132,30 +131,30 @@ void	store_map(t_mlx *mlx, char *map)
 
 void	check_map(t_mlx *mlx, char *map_dir)
 {
-	get_size(mlx->map, map_dir);
+	if (!get_size(mlx->map, map_dir))
+		clean_exit(mlx, 1);
 	printf("size = %iX%i\n", mlx->map->x_max + 1, mlx->map->y_max + 1);
 	if ((mlx->map->x_max == 3 && mlx->map->y_max < 5)
 		|| (mlx->map->y_max == 3 && mlx->map->x_max < 5))
 	{
 		error_log("map too small!");
-		exit(0);
+		exit(1);
 	}
 	if (mlx->map->x_max < 4 && mlx->map->y_max < 4)
 	{
 		error_log("map too small!");
-		exit(0);
+		exit(1);
 	}
 	if (mlx->map->x_max > 39 || mlx->map->y_max > 19)
 	{
 		error_log("map too big for screen!");
-		exit(0);
+		exit(1);
 	}
 	store_map(mlx, map_dir);
 	if (!check_wall(mlx->map))
-		clean_exit(mlx, 0);
+		clean_exit(mlx, 1);
 	if (!check_row(mlx->map))
-		clean_exit(mlx, 0);
+		clean_exit(mlx, 1);
 	if (!valid_map())
-		clean_exit(mlx, 0);
-	printf("Collectibles = %i\nExit = %i\nStart = %i\n", mlx->map->coll_nb, mlx->map->exit_nb, mlx->map->start_nb);
+		clean_exit(mlx, 1);
 }

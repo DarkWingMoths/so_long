@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 12:11:37 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/12/19 14:57:31 by mgagnon          ###   ########.fr       */
+/*   Updated: 2022/12/20 13:04:27 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int	check_action(int key, t_mlx *mlx)
 	x = 0;
 	y = 0;
 	if (key == ESC)
-		clean_exit(mlx, 1);
+		clean_exit(mlx, 0);
 	dir = get_dir(key);
 	if (dir == 0)
 		y = -1;

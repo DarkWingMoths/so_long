@@ -80,7 +80,6 @@ endif
 
 ifeq ($(UNAME), Darwin)
 clean:
-			@ afplay nonono.wav
 			@ ${RM} *.o */*.o */*/*.o
 			@ rm -rf $(NAME).dSYM >/dev/null 2>&1
 			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)objs ✔️"
@@ -88,7 +87,6 @@ endif
 
 ifeq ($(UNAME), Linux)
 clean:
-			@ afplay nonono.wav
 			@ ${RM} *.o */*.o */*/*.o
 			@ rm -rf $(NAME).dSYM >/dev/null 2>&1
 			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)objs ✔️"

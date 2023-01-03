@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:03:27 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/12/20 16:03:29 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/03 16:17:05 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,12 @@ int	get_size(t_map *map, char *map_dir)
 		return(0);
 	}
 	tmp = get_next_line(map_fd);
+	if(!tmp[0])
+	{
+		error_log("empty map!");
+		free (tmp);
+		return (0);
+	}
 	map->x_max = ft_strlen(tmp) - 1;
 	map->y_max = -1;
 	while (tmp)
@@ -89,8 +95,9 @@ int	get_size(t_map *map, char *map_dir)
 		if ((ft_strlen(tmp) - 1) != map->x_max)
 		{
 			error_log("bad map!");
+			free(tmp);
 			close(map_fd);
-			break;
+			return (0);;
 		}
 		ft_bzero(tmp, ft_strlen(tmp));
 		free(tmp);
@@ -100,6 +107,7 @@ int	get_size(t_map *map, char *map_dir)
 	close(map_fd);
 	ft_bzero(tmp, ft_strlen(tmp));
 	free(tmp);
+	return (1);
 }
 
 void	store_map(t_mlx *mlx, char *map)
@@ -122,7 +130,7 @@ void	store_map(t_mlx *mlx, char *map)
 	{
 		mlx->map->map[i] = ft_calloc((mlx->map->x_max + 1), sizeof(char *));
 		if (!mlx->map->map[i])
-			exit(1);
+			clean_exit(mlx, 1);
 		mlx->map->map[i] = get_next_line(map_fd);
 		i++;
 	}
@@ -133,7 +141,6 @@ void	check_map(t_mlx *mlx, char *map_dir)
 {
 	if (!get_size(mlx->map, map_dir))
 		clean_exit(mlx, 1);
-	printf("size = %iX%i\n", mlx->map->x_max + 1, mlx->map->y_max + 1);
 	if ((mlx->map->x_max == 3 && mlx->map->y_max < 5)
 		|| (mlx->map->y_max == 3 && mlx->map->x_max < 5))
 	{
@@ -155,6 +162,6 @@ void	check_map(t_mlx *mlx, char *map_dir)
 		clean_exit(mlx, 1);
 	if (!check_row(mlx->map))
 		clean_exit(mlx, 1);
-	if (!valid_map())
+	if (!valid_map(mlx))
 		clean_exit(mlx, 1);
 }

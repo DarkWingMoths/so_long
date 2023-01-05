@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:03:27 by mgagnon           #+#    #+#             */
-/*   Updated: 2023/01/03 16:17:05 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/04 19:15:53 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ void	check_map(t_mlx *mlx, char *map_dir)
 		clean_exit(mlx, 1);
 	if (!check_row(mlx->map))
 		clean_exit(mlx, 1);
+	/* clean_exit(mlx, 1); */
 	if (!valid_map(mlx))
 		clean_exit(mlx, 1);
 }

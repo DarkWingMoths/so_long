@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:03:03 by mgagnon           #+#    #+#             */
-/*   Updated: 2023/01/03 16:11:48 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/04 19:27:01 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	free_map(t_map *map)
 	i = 0;
 	while (i <= map->y_max)
 	{
+		if (map->map_dup != NULL)
+			ft_bzero(map->map_dup[i], ft_strlen(map->map_dup[i]));
 		free(map->map_dup[i]);
 		i++;
 	}

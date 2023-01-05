@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 11:33:37 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/30 11:38:55 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/04 18:39:25 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,10 @@ void	set_origin(void)
 	int		y;
 
 	mlx = get_data();
+	mlx->ass->wall = ft_calloc(5, sizeof(void*));
+	mlx->ass->play = ft_calloc(4, sizeof(void *));
+	mlx->ass->corn = ft_calloc(4, sizeof(void *));
+	mlx->ass->exit = ft_calloc(2, sizeof(void *));
 	y = 0;
 	while (y <= mlx->map->y_max)
 	{

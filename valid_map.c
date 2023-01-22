@@ -6,25 +6,25 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:03:03 by mgagnon           #+#    #+#             */
-/*   Updated: 2023/01/04 19:27:01 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/22 17:59:32 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	free_map(t_map *map)
+void	free_map(char **map, int max_row)
 {
 	int	i;
 
 	i = 0;
-	while (i <= map->y_max)
+	while (i <= max_row)
 	{
-		if (map->map_dup != NULL)
-			ft_bzero(map->map_dup[i], ft_strlen(map->map_dup[i]));
-		free(map->map_dup[i]);
+		if (map != NULL)
+			ft_bzero(map[i], ft_strlen(map[i]));
+		free(map[i]);
 		i++;
 	}
-	free(map->map_dup);
+	free(map);
 }
 
 char	**map_cpy(t_map *map)
@@ -36,7 +36,7 @@ char	**map_cpy(t_map *map)
 	dup = ft_calloc(map->y_max + 1, sizeof(char *));
 	while (i <= map->y_max && map->map[i])
 	{
-		dup[i] = ft_strdup((const char *)map->map[i]);
+		dup[i] = ft_strdup(map->map[i]);
 		i++;
 	}
 	return (dup);
@@ -48,8 +48,6 @@ int	flood(t_map *map, int x, int y)
 
 	if (coll_nb == -1)
 		coll_nb = map->coll_nb;
-	if (!map->map_dup)
-		map->map_dup = map_cpy(map);
 	if (x >= 0 && x <= map->x_max && y >= 0 && y <= map->y_max)
 	{
 		if (map->map_dup[y][x] == 'D')
@@ -73,6 +71,8 @@ int	flood(t_map *map, int x, int y)
 }
 int	valid_map(t_mlx *mlx)
 {
+	if (!mlx->map->map_dup)
+		mlx->map->map_dup = map_cpy(mlx->map);
 	if (mlx->map->exit_nb != 1 || mlx->map->start_nb != 1 || \
 			mlx->map->coll_nb == 0)
 	{
@@ -89,6 +89,6 @@ int	valid_map(t_mlx *mlx)
 		error_log("no valid path!");
 		return (0);
 	}
-	free_map(mlx->map);
+	free_map(mlx->map->map_dup, mlx->map->y_max);
 	return (1);
 }

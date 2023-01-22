@@ -3,103 +3,77 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
+/*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 15:16:34 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/23 10:26:54 by mgagnon          ###   ########.fr       */
+/*   Created: 2022/11/11 13:30:18 by anboisve          #+#    #+#             */
+/*   Updated: 2023/01/22 14:48:50 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*get_line_out(char *store)
+void	*ft_sfree(void *p)
 {
-	int		i;
-	char	*line;
+	if (p)
+		free(p);
+	return (NULL);
+}
+char	*ft_tiny_split(char *s, size_t *cut)
+{
+	char	*new;
+	size_t	i;
 
 	i = 0;
-	if (!store[i])
-		return (NULL);
-	while (store[i] && store[i] != '\n')
-		i++;
-	line = ft_calloc((i + 2), sizeof(char));
-	if (!line)
-		return (NULL);
-	i = 0;
-	while (store[i] && store[i] != '\n')
-	{
-		line[i] = store[i];
-		i++;
-	}
-	if (store[i] == '\n')
-	{
-		/* line[i] = '\n'; */
-		i++;
-	}
-	line[i - 1] = '\0';
-	return (line);
+	while (s[i])
+		if (s[i++] == '\n')
+			break ;
+	new = ft_calloc(i + 1, sizeof(char));
+	if (!new)
+		return (new = ft_sfree(new));
+	*cut = i;
+	while (i--)
+		new[i] = s[i];
+	return (new);
 }
 
-char	*keep_the_rest(char *store)
+char	ft_find(char *s)
 {
-	int		i;
-	int		j;
-	char	*new_store;
+	size_t	i;
 
 	i = 0;
-	j = 0;
-	while (store[i] && store[i] != '\n')
+	while (s[i])
+	{
+		if (s[i] == '\n')
+			return ('\n');
 		i++;
-	if (!store[i])
-	{
-		free(store);
-		return (NULL);
 	}
-	new_store = ft_calloc((ft_strlen(store) - i + 1),sizeof(char));
-	if (!new_store)
-		return (NULL);
-	i++;
-	while (store[i])
-		new_store[j++] = store[i++];
-	new_store[j] = '\0';
-	free(store);
-	return (new_store);
-}
-
-char	*read_and_save(int fd, char *save)
-{
-	int			read_bytes;
-	char	*buff;
-
-	buff = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (!buff)
-		return (NULL);
-	read_bytes = 1;
-	while (!ft_strchr(save, '\n') && read_bytes != 0)
-	{
-		read_bytes = read(fd, buff, BUFFER_SIZE);
-		if (read_bytes == -1)
-		{
-			free (buff);
-			return (NULL);
-		}
-		buff[read_bytes] = '\0';
-		save = ft_strjoin(save, buff);
-	}
-	if (buff[0])
-		free (buff);
-	return (save);
+	return ('0');
 }
 
 char	*get_next_line(int fd)
 {
-	char		*line;
-	static char	*store[257];
+	static char	*book;
+	t_info		t_val;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	store[fd] = read_and_save(fd, store[fd]);
-	line = get_line_out(store[fd]);
-	store[fd] = keep_the_rest(store[fd]);
-	return (line);
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
+		return (book = ft_sfree(book));
+	if (!book)
+		book = ft_calloc(1, sizeof(char));
+	t_val.tmp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	t_val.rv = 0;
+	while (ft_find(book) == '0')
+	{
+		ft_bzero(t_val.tmp, BUFFER_SIZE + 1);
+		t_val.rv = read(fd, t_val.tmp, BUFFER_SIZE);
+		if (t_val.rv <= 0)
+			break ;
+		book = ft_strjoin(book, t_val.tmp);
+	}
+	t_val.tmp = ft_sfree(t_val.tmp);
+	if (t_val.rv == -1 || (t_val.rv <= 0 && *book == 0))
+		return (book = ft_sfree(book), NULL);
+	t_val.tmp = ft_tiny_split(book, &t_val.cut);
+	t_val.tmp2 = book;
+	book = ft_strjoin(NULL, book + t_val.cut);
+	return (ft_sfree(t_val.tmp2), t_val.tmp);
 }

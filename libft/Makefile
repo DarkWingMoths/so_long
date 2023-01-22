@@ -6,7 +6,7 @@
 #    By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/18 10:57:07 by mgagnon           #+#    #+#              #
-#    Updated: 2022/10/26 16:21:40 by mgagnon          ###   ########.fr        #
+#    Updated: 2023/01/22 13:49:58 by mgagnon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,10 @@ AR = ar -rcs
 RM = rm -f
 
 SRCS = ft_memset.c \
-		ft_bzero.c \
 		ft_memcpy.c \
 		ft_memmove.c \
 		ft_memchr.c \
 		ft_memcmp.c \
-		ft_strlen.c \
 		ft_strlcpy.c \
 		ft_strlcat.c \
 		ft_strchr.c \
@@ -38,10 +36,8 @@ SRCS = ft_memset.c \
 		ft_isprint.c \
 		ft_toupper.c \
 		ft_tolower.c \
-		ft_calloc.c \
 		ft_strdup.c \
 		ft_substr.c \
-		ft_strjoin.c \
 		ft_strtrim.c \
 		ft_split.c \
 		ft_itoa.c \
@@ -60,11 +56,13 @@ SRCS = ft_memset.c \
 	  	ft_lstdelone.c \
 	  	ft_lstclear.c \
 	  	ft_lstiter.c \
-	  	ft_lstmap.c \
+		ft_lstmap.c \
 		get_next_line.c \
+		get_next_line_utils.c \
 		nbr.c \
 		utils.c \
-		ft_printf.c
+		ft_printf.c \
+		print_map.c
 
 OBJS = $(SRCS:.c=.o)
 

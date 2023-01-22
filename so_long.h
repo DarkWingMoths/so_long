@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:21:47 by mgagnon           #+#    #+#             */
-/*   Updated: 2023/01/03 16:12:44 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/22 17:48:05 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ void	put_outer_wall(t_mlx *mlx);
 int		check_action(int key, t_mlx *mlx);
 int		end_game(t_mlx *mlx);
 int		valid_map(t_mlx *mlx);
+void	free_map(char **map, int max_row);
 
 #endif

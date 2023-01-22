@@ -6,13 +6,13 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:47:53 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/05/18 16:45:22 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/22 13:26:28 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+char	*ft_strnstr(char *haystack, char *needle, size_t len)
 {
 	size_t	i;
 	size_t	newlen;

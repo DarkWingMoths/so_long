@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:26:49 by mgagnon           #+#    #+#             */
-/*   Updated: 2023/01/04 19:31:26 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/22 17:39:18 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 int	end_game(t_mlx *mlx)
 {
 	printf("\rfinal move count = %u\n", mlx->mov_nb);
-	/* clean_exit(mlx, 0); */
-	exit(1);
+	clean_exit(mlx, 0);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:36:48 by mgagnon           #+#    #+#             */
-/*   Updated: 2023/01/04 19:27:29 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/22 17:50:19 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,7 @@ void	clean_exit(t_mlx *mlx, int status)
 	free(mlx->ass->exit);
 	free(mlx->ass);
 	i = mlx->map->y_max;
-	while (i >= 0)
-	{
-		if (mlx->map->map[i] != NULL)
-			ft_bzero(mlx->map->map[i], ft_strlen(mlx->map->map[i]));
-		free(mlx->map->map[i]);
-		i--;
-	}
-	free(mlx->map);
+	free_map(mlx->map->map, i);
 	free(mlx);
 	mlx_destroy_window(mlx->mlx, mlx->window);
 	exit(status);

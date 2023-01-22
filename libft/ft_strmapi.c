@@ -6,13 +6,13 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:47:31 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/05/21 15:05:15 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/22 13:35:14 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+char	*ft_strmapi(char *s, char (*f)(unsigned int, char))
 {
 	unsigned int	index;
 	char			*ret;

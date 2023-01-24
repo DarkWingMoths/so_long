@@ -9,16 +9,7 @@ FLAGS    := -Wall -Wextra -Werror
 #                                 PROGRAM'S SRCS                               #
 ################################################################################
 
-SRCS        :=         check_action.c \
-		       check_info.c \
-		       check_map.c \
-		       clean_exit.c \
-		       error.c \
-		       main.c \
-		       put_map.c \
-		       set_obj.c \
-		       put_wall.c \
-		       valid_map.c
+SRCS        := $(shell find ./src -iname "*.c") 
 
 OBJS        := $(SRCS:.c=.o)
 
@@ -36,15 +27,6 @@ CYAN 		:= \033[1;36m
 RM		:= rm -f
 
 UNAME		:=	$(shell uname)
-# ifeq ($(UNAME), Darwin)
-# .c.o:
-# 	${CC} ${FLAGS} -Imlx -c $< -o ${<:.c=.o}
-# endif
-
-# ifeq ($(UNAME), Linux)
-# .c.o:
-# 	${CC} ${FLAGS} -Imlx_linux -c $< -o ${<:.c=.o}
-# endif
 
 all:	script	play	${NAME}
 

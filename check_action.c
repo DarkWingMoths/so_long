@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 12:11:37 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/12/20 13:04:27 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/23 16:31:10 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,10 @@ void	do_act(t_mlx *mlx, int dir, int x, int y)
 	else if (new_pos == 'E')
 	{
 		print_old(mlx);
-		print_new(mlx, mlx->ass->exit[0], dir);
+		if (mlx->end_flag == 1)
+			print_new(mlx, mlx->ass->exit[1], dir);
+		else
+			print_new(mlx, mlx->ass->exit[0],dir);
 		mlx->pos_x += x;
 		mlx->pos_y += y;
 		mlx->mov_nb++;
@@ -125,7 +128,7 @@ int	check_action(int key, t_mlx *mlx)
 	x = 0;
 	y = 0;
 	if (key == ESC)
-		clean_exit(mlx, 0);
+		exit(0);
 	dir = get_dir(key);
 	if (dir == 0)
 		y = -1;

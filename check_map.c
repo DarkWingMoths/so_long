@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:03:27 by mgagnon           #+#    #+#             */
-/*   Updated: 2023/01/22 17:37:23 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/23 16:58:01 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	check_row(t_map *map)
 		}
 		y++;
 	}
-	set_origin();
 	return (1);
 }
 
@@ -110,59 +109,27 @@ int	get_size(t_map *map, char *map_dir)
 	return (1);
 }
 
-void	store_map(t_mlx *mlx, char *map)
-{
-	int	i;
-	int	map_fd;
-
-	i = 0;
-	map_fd = open(map, O_RDONLY);
-	if (map_fd == -1)
-	{
-		error_log("loading map!");
-		close(map_fd);
-		exit(1);
-	}
-	mlx->map->map = ft_calloc(sizeof(char *), (mlx->map->y_max + 1));
-	if (!mlx->map->map)
-		clean_exit(mlx, 1);
-	while (i <= mlx->map->y_max)
-	{
-		mlx->map->map[i] = get_next_line(map_fd);
-		i++;
-	}
-	close(map_fd);
-}
-
 void	check_map(t_mlx *mlx, char *map_dir)
 {
-	if (!get_size(mlx->map, map_dir))
+	static	t_map	map;
+
+	mlx->map = &map;
+	if (!get_size(&map, map_dir))
 		clean_exit(mlx, 1);
-	if ((mlx->map->x_max == 3 && mlx->map->y_max < 5)
+	if ((map.x_max == 3 && map.y_max < 5)
 		|| (mlx->map->y_max == 3 && mlx->map->x_max < 5))
 	{
 		error_log("map too small!");
 		exit(1);
 	}
-	if (mlx->map->x_max < 4 && mlx->map->y_max < 4)
+	if (map.x_max < 4 && map.y_max < 4)
 	{
 		error_log("map too small!");
 		exit(1);
 	}
-	if (mlx->map->x_max > 39 || mlx->map->y_max > 19)
+	if (map.x_max > 39 || map.y_max > 19)
 	{
 		error_log("map too big for screen!");
 		exit(1);
 	}
-	write(1, "pre store\n", 10);
-	store_map(mlx, map_dir);
-	write(1, "post store\n", 11);
-	if (!check_wall(mlx->map))
-		clean_exit(mlx, 1);
-	if (!check_row(mlx->map))
-		clean_exit(mlx, 1);
-	write(1, "pre Valid\n", 10);
-	if (!valid_map(mlx))
-		clean_exit(mlx, 1);
-	store_map(mlx, map_dir);
 }

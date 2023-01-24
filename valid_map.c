@@ -6,26 +6,11 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:03:03 by mgagnon           #+#    #+#             */
-/*   Updated: 2023/01/22 17:59:32 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/23 14:19:45 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	free_map(char **map, int max_row)
-{
-	int	i;
-
-	i = 0;
-	while (i <= max_row)
-	{
-		if (map != NULL)
-			ft_bzero(map[i], ft_strlen(map[i]));
-		free(map[i]);
-		i++;
-	}
-	free(map);
-}
 
 char	**map_cpy(t_map *map)
 {

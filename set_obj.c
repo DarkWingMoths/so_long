@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 11:33:37 by mgagnon           #+#    #+#             */
-/*   Updated: 2023/01/04 18:39:25 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/23 16:57:57 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,17 +96,17 @@ void	is_what(t_mlx *mlx, int x, int y)
 	}
 }
 
-void	set_origin(void)
+void	set_origin(t_mlx *mlx)
 {
-	t_mlx	*mlx;
+	static t_assets	ass;
 	int		x;
 	int		y;
 
-	mlx = get_data();
-	mlx->ass->wall = ft_calloc(5, sizeof(void*));
-	mlx->ass->play = ft_calloc(4, sizeof(void *));
-	mlx->ass->corn = ft_calloc(4, sizeof(void *));
-	mlx->ass->exit = ft_calloc(2, sizeof(void *));
+	mlx->ass = &ass;
+	ass.wall = ft_calloc(5, sizeof(void*));
+	ass.play = ft_calloc(4, sizeof(void *));
+	ass.corn = ft_calloc(4, sizeof(void *));
+	ass.exit = ft_calloc(2, sizeof(void *));
 	y = 0;
 	while (y <= mlx->map->y_max)
 	{

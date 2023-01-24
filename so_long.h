@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:21:47 by mgagnon           #+#    #+#             */
-/*   Updated: 2023/01/22 17:48:05 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/23 16:48:43 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,14 @@ void	put_map(t_mlx *mlx);
 void	check_map(t_mlx *mlx, char *map_dir);
 void	clean_exit(t_mlx *mlx, int status);
 void	set_assets(t_mlx *mlx);
-void	set_origin(void);
+void	set_origin(t_mlx *mlx);
 void	put_outer_wall(t_mlx *mlx);
 int		check_action(int key, t_mlx *mlx);
 int		end_game(t_mlx *mlx);
 int		valid_map(t_mlx *mlx);
 void	free_map(char **map, int max_row);
+void	store_map(t_mlx *mlx, char *map_dir);
+int		check_wall(t_map *map);
+int		check_row(t_map *map);
 
 #endif

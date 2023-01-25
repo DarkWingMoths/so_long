@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 10:57:29 by mgagnon           #+#    #+#             */
-/*   Updated: 2023/01/22 13:50:42 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/25 17:16:21 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ typedef struct s_data
 
 typedef struct s_info
 {
-    char    *tmp;
-    char    *tmp2;
-    int        rv;
-    size_t    cut;
-}    t_info;
+	char	*tmp;
+	char	*tmp2;
+	int		rv;
+	size_t	cut;
+}	t_info;
 
 int		ft_printf(const char *format, ...);
 void	get_args(t_data *data);
@@ -69,7 +69,7 @@ int		ft_isprint(int c);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t n);
 void	*ft_memset(void *b, int c, size_t len);
-size_t		ft_strlen(char *s);
+size_t	ft_strlen(char *s);
 void	*ft_memchr(const void *s, int c, size_t n);
 size_t	ft_strlcat(char *dst, char *src, size_t dstsize);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);

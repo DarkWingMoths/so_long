@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:43:57 by mgagnon           #+#    #+#             */
-/*   Updated: 2022/11/20 20:12:30 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/25 17:10:47 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ char	*ft_strchr(char *s, int c)
 	c %= 256;
 	i = 0;
 	if (!s)
-		return(0);
+		return (0);
 	if (c == '\0')
-		return((char *)&s[ft_strlen(s)]);
+		return ((char *)&s[ft_strlen(s)]);
 	while (s[i] != '\0')
 	{
 		if (s[i] == (char) c)

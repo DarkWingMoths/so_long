@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_map.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/22 13:46:23 by mgagnon           #+#    #+#             */
-/*   Updated: 2023/01/25 17:12:19 by mgagnon          ###   ########.fr       */
+/*   Created: 2022/04/12 14:47:20 by mgagnon           #+#    #+#             */
+/*   Updated: 2023/01/25 16:38:02 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	print_map(char **map)
+size_t	ft_strlen(char *s)
 {
 	int	i;
 
+	if (!s)
+		return (0);
 	i = 0;
-	while (map && map[i])
-	{
-		ft_putstr_fd(map[i], 1);
+	while (s[i])
 		i++;
-	}
+	return (i);
 }

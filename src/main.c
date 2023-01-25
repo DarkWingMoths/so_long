@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:26:49 by mgagnon           #+#    #+#             */
-/*   Updated: 2023/01/24 17:45:49 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/25 11:47:26 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	end_game(t_mlx *mlx)
 {
-	printf("\rfinal move count = %u\n", mlx->mov_nb);
+	printf("final move count = %u\n", mlx->mov_nb);
 	clean_exit(mlx, 0);
 	return (0);
 }
@@ -30,7 +30,7 @@ void	store_map(t_mlx *mlx, char *map)
 	{
 		error_log("loading map!");
 		close(map_fd);
-		exit(1);
+		clean_exit(mlx, 1);
 	}
 	mlx->map->map = ft_calloc(sizeof(char *), (mlx->map->y_max + 1));
 	if (!mlx->map->map)

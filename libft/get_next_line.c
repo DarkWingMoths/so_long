@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 13:30:18 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/22 14:48:50 by mgagnon          ###   ########.fr       */
+/*   Created: 2023/01/25 16:54:29 by mgagnon           #+#    #+#             */
+/*   Updated: 2023/01/25 16:56:59 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	*ft_sfree(void *p)
 		free(p);
 	return (NULL);
 }
+
 char	*ft_tiny_split(char *s, size_t *cut)
 {
 	char	*new;

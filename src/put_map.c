@@ -6,11 +6,32 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 09:52:50 by mgagnon           #+#    #+#             */
-/*   Updated: 2023/01/24 14:38:16 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/25 17:32:07 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+
+void	anim_coll(int x, int y, t_mlx * mlx)
+{
+	while (mlx->map->map[y][x] == 'C')
+	{
+		mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->ass->coll, (x + 2) * 64, y * 64);
+		usleep(800);
+		mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->ass->coll, (x + 5) * 64, y * 64);
+		usleep(800);
+		mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->ass->coll, (x + 2) * 64, y * 64);
+		usleep(800);
+		mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->ass->coll, x * 64, y * 64);
+		usleep(800);
+		mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->ass->coll, (x - 2) * 64, y * 64);
+		usleep(800);
+		mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->ass->coll, (x - 5) * 64, y * 64);
+		usleep(800);
+		mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->ass->coll, (x - 2) * 64, y * 64);
+		usleep(800);
+	}
+}
 
 void	*put_img(char img, int x, int y, t_mlx *mlx)
 {
@@ -27,6 +48,7 @@ void	*put_img(char img, int x, int y, t_mlx *mlx)
 	{
 		mlx_put_image_to_window(mlx->mlx, mlx->window, \
 				mlx->ass->empty, x * 64, y * 64);
+		anim_coll(x, y, mlx);
 		return (mlx->ass->coll);
 	}
 	else if (img == 'E')

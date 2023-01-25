@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_map.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/22 13:46:23 by mgagnon           #+#    #+#             */
-/*   Updated: 2023/01/25 17:12:19 by mgagnon          ###   ########.fr       */
+/*   Created: 2022/05/18 10:58:53 by mgagnon           #+#    #+#             */
+/*   Updated: 2022/05/18 11:47:01 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	print_map(char **map)
+void	ft_bzero(void *s, size_t n)
 {
-	int	i;
-
-	i = 0;
-	while (map && map[i])
-	{
-		ft_putstr_fd(map[i], 1);
-		i++;
-	}
+	ft_memset(s, '\0', n);
 }

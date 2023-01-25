@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 12:11:37 by mgagnon           #+#    #+#             */
-/*   Updated: 2023/01/24 17:06:52 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/25 17:20:21 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,9 @@ int	check_action(int key, t_mlx *mlx)
 	else if (dir == 3)
 		x = 1;
 	if (dir != 10)
+	{
 		do_act(mlx, dir, x, y);
-	printf("\rnumber of move = %u\n", mlx->mov_nb);
+		printf("\rnumber of move = %u\n", mlx->mov_nb);
+	}
 	return (0);
 }

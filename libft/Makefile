@@ -6,7 +6,7 @@
 #    By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/18 10:57:07 by mgagnon           #+#    #+#              #
-#    Updated: 2023/01/22 13:49:58 by mgagnon          ###   ########.fr        #
+#    Updated: 2023/01/25 16:39:29 by mgagnon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,11 +58,14 @@ SRCS = ft_memset.c \
 	  	ft_lstiter.c \
 		ft_lstmap.c \
 		get_next_line.c \
-		get_next_line_utils.c \
 		nbr.c \
 		utils.c \
 		ft_printf.c \
-		print_map.c
+		print_map.c \
+		ft_strlen.c \
+		ft_bzero.c \
+		ft_calloc.c \
+		ft_strjoin.c
 
 OBJS = $(SRCS:.c=.o)
 

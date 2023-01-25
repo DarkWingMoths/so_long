@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:51:16 by mgagnon           #+#    #+#             */
-/*   Updated: 2023/01/24 14:36:08 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/25 11:46:47 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ void	check_info(int ac, char *map_dir)
 			error_log("Too much argument!");
 		if (ac < 2)
 			error_log("Not enough argument!");
+		exit(0);
+	}
+	if (map_dir[ft_strlen(map_dir) - 1] != 'r')
+	{
+		error_log("Argument must finish in .ber !");
 		exit(0);
 	}
 	check_type(map_dir);

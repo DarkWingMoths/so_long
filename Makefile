@@ -33,8 +33,15 @@ all:	script	play	${NAME}
 script:
 	@ bash banner.sh
 
+ifeq ($(UNAME), Darwin)
 play:
 	@ afplay DAMAGE.wav &
+endif
+
+ifeq ($(UNAME), Linux)
+play:
+	@ aplay DAMAGE.wav &
+endif
 
 ifeq ($(UNAME), Darwin)
 $(NAME): ${OBJS}
@@ -56,7 +63,7 @@ $(NAME): ${OBJS}
 			@ $(MAKE) -C libft/
 			@ cp ./libft/libft.a .
 			$(CC) $(FLAGS) -g3 -o $(NAME) $(OBJS) libft.a -Imlx_linux -Lmlx_linux -lmlx -lmlx_Linux -L/usr/lib -lXext -lX11 -lm
-			@ afplay complete.wav &
+			@ aplay complete.wav &
 			@echo "$(GREEN)$(NAME) created[0m ✔️"
 endif
 
@@ -77,7 +84,7 @@ endif
 
 ifeq ($(UNAME), Linux)
 fclean:		clean
-			@ afplay destroy.wav
+			@ aplay destroy.wav
 			@ ${RM} ${NAME} libft.a libmlx.a /mlx_linux/libmlx.a
 			@ $(MAKE) -C mlx_linux clean
 			@ $(MAKE) -C libft/ fclean

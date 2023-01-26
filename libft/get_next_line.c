@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 16:54:29 by mgagnon           #+#    #+#             */
-/*   Updated: 2023/01/25 16:56:59 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/25 21:55:53 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*get_next_line(int fd)
 	static char	*book;
 	t_info		t_val;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > FOPEN_MAX)
 		return (book = ft_sfree(book));
 	if (!book)
 		book = ft_calloc(1, sizeof(char));

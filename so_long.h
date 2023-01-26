@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:21:47 by mgagnon           #+#    #+#             */
-/*   Updated: 2023/01/24 17:23:38 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/25 22:13:50 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ void	do_exit(t_mlx *mlx, int dir, int x, int y);
 void	do_wall(t_mlx *mlx, int dir, int x, int y);
 void	print_new(t_mlx *mlx, void *base, int dir);
 int		get_next_shish(t_map *map, int map_fd);
+int		anim_coll(t_mlx *mlx);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mgagnon <mgagnon@student.42quebec.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 11:26:49 by mgagnon           #+#    #+#             */
-/*   Updated: 2023/01/25 11:47:26 by mgagnon          ###   ########.fr       */
+/*   Updated: 2023/01/25 23:17:47 by mgagnon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int	main(int ac, char **av)
 	if (!valid_map(&mlx))
 		clean_exit(&mlx, 1);
 	put_map(&mlx);
-	mlx_hook(mlx.window, CLOSE, 0L, end_game, &mlx);
+	/* mlx_hook(mlx.window, CLOSE, 0L, end_game, &mlx); */
 	mlx_key_hook(mlx.window, check_action, &mlx);
+	mlx_loop_hook(mlx.mlx, &anim_coll, &mlx); 
 	mlx_loop(&mlx.mlx);
 }
